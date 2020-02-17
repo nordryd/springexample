@@ -1,5 +1,7 @@
 package blackjack;
 
+import org.springframework.stereotype.Service;
+
 /**
  * <p>
  * Service class for {@link BlackjackController}.
@@ -7,5 +9,6 @@ package blackjack;
  *
  * @author Nordryd
  */
+@Service
 public class BlackjackService
 {}
