@@ -6,6 +6,8 @@ import static java.lang.String.format;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
 /**
  * <p>
  * Represents a deck of {@link Card cards}.
@@ -13,6 +15,7 @@ import java.util.Random;
  *
  * @author Nordryd
  */
+@Component
 public class BlackjackDeck
 {
     private static final Random RNG = new Random();

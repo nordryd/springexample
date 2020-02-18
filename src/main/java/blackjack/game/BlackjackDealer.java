@@ -1,5 +1,7 @@
 package blackjack.game;
 
+import org.springframework.stereotype.Component;
+
 /**
  * <p>
  * Represents a dealer in a {@link BlackjackGame game of blackjack}.
@@ -7,6 +9,7 @@ package blackjack.game;
  *
  * @author Nordryd
  */
+@Component
 public class BlackjackDealer extends BlackjackPlayer
 {
     /**

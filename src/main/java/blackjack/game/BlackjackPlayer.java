@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * <p>
  * Represents a player in a {@link BlackjackGame game of blackjack}.
@@ -13,6 +16,7 @@ import java.util.List;
  *
  * @author Nordryd
  */
+@Component
 public class BlackjackPlayer
 {
     private static final int BLACKJACK_NO = 21;
@@ -26,6 +30,7 @@ public class BlackjackPlayer
      *
      * @param game the {@link BlackjackGame game} this player is participating in.
      */
+    @Autowired
     public BlackjackPlayer(final BlackjackGame game) {
         this.game = game;
         this.hand = new ArrayList<>();

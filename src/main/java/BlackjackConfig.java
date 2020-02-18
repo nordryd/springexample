@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
  * Configuration class for the Blackjack game service.
  * </p>
  *
- * @author Jake Overton
+ * @author Nordryd
  */
 @Configuration
 public class BlackjackConfig
 {
-
+    // maybe put retrieving a dealer/player here, or the game itself? remember, keep all NEW declarations here.
 }
