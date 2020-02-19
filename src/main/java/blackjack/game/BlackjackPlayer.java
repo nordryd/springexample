@@ -1,6 +1,7 @@
 package blackjack.game;
 
 import static blackjack.game.BlackjackDeck.Card;
+import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,12 +39,35 @@ public class BlackjackPlayer
         deal();
     }
 
+    /**
+     * Draw a card for this {@link BlackjackPlayer player}.
+     */
     public void hit() {
+        if (state != PlayerState.PLAYING_TURN) {
+            state = PlayerState.PLAYING_TURN;
+        }
         draw();
     }
 
+    /**
+     * Mark this {@link BlackjackPlayer player} as being finished with their turn.
+     */
     public void stay() {
         this.state = PlayerState.STAYING;
+    }
+
+    /**
+     * @return the {@link BlackjackPlayer player's} current {@link PlayerState game state}.
+     */
+    public PlayerState getPlayerState() {
+        return state;
+    }
+
+    /**
+     * @return the {@link BlackjackPlayer player's} current hand. Will be immutable.
+     */
+    public List<Card> getHand() {
+        return asList(hand.toArray(new Card[0]));
     }
 
     /**
@@ -77,7 +101,7 @@ public class BlackjackPlayer
         }
     }
 
-    private enum PlayerState
+    enum PlayerState
     {
         AWAITING_TURN,
         PLAYING_TURN,
