@@ -1,4 +1,4 @@
-package blackjack;
+package com.nordryd.springexample.blackjack;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

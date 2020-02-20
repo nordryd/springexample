@@ -1,4 +1,4 @@
-package blackjack;
+package com.nordryd.springexample.blackjack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

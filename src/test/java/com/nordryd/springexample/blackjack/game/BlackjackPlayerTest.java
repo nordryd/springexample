@@ -1,8 +1,7 @@
-package blackjack.game;
+package com.nordryd.springexample.blackjack.game;
 
-import static blackjack.game.BlackjackDeck.Card.Rank;
-import static blackjack.game.BlackjackDeck.Card.Suit;
-import static blackjack.game.BlackjackPlayer.PlayerState;
+import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Rank;
+import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Suit;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,7 +10,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import blackjack.game.BlackjackDeck.Card;
+import com.nordryd.springexample.blackjack.game.BlackjackDeck.Card;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +46,7 @@ public class BlackjackPlayerTest
     @Test
     public void testCreatingPlayer() {
         assertThat(player.getHand(), is(asList(INIT_CARD, INIT_CARD)));
-        assertThat(player.getPlayerState(), is(PlayerState.AWAITING_TURN));
+        assertThat(player.getPlayerState(), is(BlackjackPlayer.PlayerState.AWAITING_TURN));
         verify(mockDeck, times(2)).draw();
     }
 
@@ -57,7 +56,7 @@ public class BlackjackPlayerTest
         setNextDraw(cardFromHit);
         player.hit();
         assertThat(player.getHand(), is(asList(INIT_CARD, INIT_CARD, cardFromHit)));
-        assertThat(player.getPlayerState(), is(PlayerState.PLAYING_TURN));
+        assertThat(player.getPlayerState(), is(BlackjackPlayer.PlayerState.PLAYING_TURN));
         verify(mockDeck, times(3)).draw();
     }
 

@@ -1,7 +1,7 @@
-package blackjack.game;
+package com.nordryd.springexample.blackjack.game;
 
-import static blackjack.game.BlackjackDeck.Card.Rank;
-import static blackjack.game.BlackjackDeck.Card.Suit;
+import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Rank;
+import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Suit;
 import static java.lang.String.format;
 
 import java.util.Random;

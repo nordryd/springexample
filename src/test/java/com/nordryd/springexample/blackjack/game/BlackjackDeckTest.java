@@ -1,4 +1,4 @@
-package blackjack.game;
+package com.nordryd.springexample.blackjack.game;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.IntStream.range;

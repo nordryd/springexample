@@ -1,4 +1,4 @@
-package blackjack.game;
+package com.nordryd.springexample.blackjack.game;
 
 import org.springframework.stereotype.Component;
 

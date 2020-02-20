@@ -1,9 +1,7 @@
-package blackjack.game;
-
-import static blackjack.game.BlackjackDeck.Card;
-import static java.util.Arrays.asList;
+package com.nordryd.springexample.blackjack.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class BlackjackPlayer
     private static final int BLACKJACK_NO = 21;
 
     protected final BlackjackGame game;
-    protected final List<Card> hand;
+    protected final List<BlackjackDeck.Card> hand;
     private PlayerState state;
 
     /**
@@ -66,8 +64,8 @@ public class BlackjackPlayer
     /**
      * @return the {@link BlackjackPlayer player's} current hand. Will be immutable.
      */
-    public List<Card> getHand() {
-        return asList(hand.toArray(new Card[0]));
+    public List<BlackjackDeck.Card> getHand() {
+        return Arrays.asList(hand.toArray(new BlackjackDeck.Card[0]));
     }
 
     /**
@@ -91,7 +89,7 @@ public class BlackjackPlayer
      */
     private void tick() {
         int handValue = 0;
-        final Iterator<Card> handIter = hand.iterator();
+        final Iterator<BlackjackDeck.Card> handIter = hand.iterator();
         while ((handValue < BLACKJACK_NO) && handIter.hasNext()) {
             handValue += handIter.next().getRank().getStrength();
         }
