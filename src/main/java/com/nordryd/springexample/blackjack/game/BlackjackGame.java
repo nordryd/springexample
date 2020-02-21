@@ -1,6 +1,9 @@
 package com.nordryd.springexample.blackjack.game;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,8 +14,10 @@ import org.springframework.stereotype.Component;
  * @author Nordryd
  */
 @Component
-public class BlackjackGame
+public class BlackjackGame implements ApplicationContextAware
 {
+    private ApplicationContext context;
+
     private final BlackjackDeck deck;
     private final BlackjackPlayer player, dealer;
     private GameState gameState;
@@ -37,6 +42,11 @@ public class BlackjackGame
      */
     public BlackjackDeck getDeck() {
         return deck;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException {
+        this.context = context;
     }
 
     private enum GameState

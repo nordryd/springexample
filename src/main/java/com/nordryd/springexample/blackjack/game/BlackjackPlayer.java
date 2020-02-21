@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.nordryd.springexample.gameobjects.Card;
 
 /**
  * <p>
@@ -15,13 +14,12 @@ import org.springframework.stereotype.Component;
  *
  * @author Nordryd
  */
-@Component
 public class BlackjackPlayer
 {
     private static final int BLACKJACK_NO = 21;
 
     protected final BlackjackGame game;
-    protected final List<BlackjackDeck.Card> hand;
+    protected final List<Card> hand;
     private PlayerState state;
 
     /**
@@ -29,7 +27,6 @@ public class BlackjackPlayer
      *
      * @param game the {@link BlackjackGame game} this player is participating in.
      */
-    @Autowired
     public BlackjackPlayer(final BlackjackGame game) {
         this.game = game;
         this.hand = new ArrayList<>();
@@ -64,8 +61,8 @@ public class BlackjackPlayer
     /**
      * @return the {@link BlackjackPlayer player's} current hand. Will be immutable.
      */
-    public List<BlackjackDeck.Card> getHand() {
-        return Arrays.asList(hand.toArray(new BlackjackDeck.Card[0]));
+    public List<Card> getHand() {
+        return Arrays.asList(hand.toArray(new Card[0]));
     }
 
     /**
@@ -89,7 +86,7 @@ public class BlackjackPlayer
      */
     private void tick() {
         int handValue = 0;
-        final Iterator<BlackjackDeck.Card> handIter = hand.iterator();
+        final Iterator<Card> handIter = hand.iterator();
         while ((handValue < BLACKJACK_NO) && handIter.hasNext()) {
             handValue += handIter.next().getRank().getStrength();
         }

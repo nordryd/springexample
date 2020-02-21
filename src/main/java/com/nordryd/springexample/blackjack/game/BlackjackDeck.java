@@ -1,11 +1,11 @@
 package com.nordryd.springexample.blackjack.game;
 
-import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Rank;
-import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Suit;
-import static java.lang.String.format;
+import static com.nordryd.springexample.gameobjects.Card.Rank;
+import static com.nordryd.springexample.gameobjects.Card.Suit;
 
 import java.util.Random;
 
+import com.nordryd.springexample.gameobjects.Card;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,93 +24,7 @@ public class BlackjackDeck
      * @return a random {@link Card}.
      */
     public Card draw() {
-        return new Card(Rank.getRandomRank(), Suit.getRandomSuit());
-    }
-
-    public static class Card
-    {
-        private final Rank rank;
-        private final Suit suit;
-
-        private Card(final Rank rank, final Suit suit) {
-            this.rank = rank;
-            this.suit = suit;
-        }
-
-        /**
-         * @return this {@link Card card's} {@link Rank}.
-         */
-        public Rank getRank() {
-            return rank;
-        }
-
-        /**
-         * @return this {@link Card card's} {@link Suit}.
-         */
-        public Suit getSuit() {
-            return suit;
-        }
-
-        @Override
-        public String toString() {
-            return format("%s of %ss", rank, suit);
-        }
-
-        /**
-         * Represents a card rank.
-         */
-        public enum Rank
-        {
-            TWO(2),
-            THREE(3),
-            FOUR(4),
-            FIVE(5),
-            SIX(6),
-            SEVEN(7),
-            EIGHT(8),
-            NINE(9),
-            TEN(10),
-            JACK(10),
-            QUEEN(10),
-            KING(10),
-            ACE(11);
-
-            private int strength;
-
-            Rank(final int strength) {
-                this.strength = strength;
-            }
-
-            /**
-             * @return the strength of the current {@link Rank}.
-             */
-            public int getStrength() {
-                return strength;
-            }
-
-            @Override
-            public String toString() {
-                return name();
-            }
-
-            private static Rank getRandomRank() {
-                return values()[RNG.nextInt(values().length)];
-            }
-        }
-
-        /**
-         * Represents a card suit.
-         */
-        public enum Suit
-        {
-            CLUB,
-            DIAMOND,
-            HEART,
-            SPADE;
-
-            private static Suit getRandomSuit() {
-                return values()[RNG.nextInt(values().length)];
-            }
-        }
+        return Card.get(Rank.values()[RNG.nextInt(Rank.values().length)])
+                .of(Suit.values()[RNG.nextInt(Suit.values().length)]);
     }
 }

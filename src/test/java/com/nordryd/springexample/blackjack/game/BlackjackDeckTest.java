@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import com.nordryd.springexample.gameobjects.Card;
 import org.junit.Test;
 
 /**
@@ -17,8 +18,8 @@ import org.junit.Test;
  */
 public class BlackjackDeckTest
 {
-    private static final List<BlackjackDeck.Card.Rank> POSSIBLE_RANKS = asList(BlackjackDeck.Card.Rank.values());
-    private static final List<BlackjackDeck.Card.Suit> POSSIBLE_SUITS = asList(BlackjackDeck.Card.Suit.values());
+    private static final List<Card.Rank> POSSIBLE_RANKS = asList(Card.Rank.values());
+    private static final List<Card.Suit> POSSIBLE_SUITS = asList(Card.Suit.values());
     private static final int STD_DECK_SIZE = 52;
 
     private static final BlackjackDeck DECK = new BlackjackDeck();

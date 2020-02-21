@@ -1,8 +1,5 @@
 package com.nordryd.springexample.blackjack.game;
 
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-
 /**
  * <p>
  * Unit tests for {@link BlackjackGame}.
@@ -10,7 +7,6 @@ import org.mockito.junit.MockitoJUnitRunner;
  *
  * @author Nordryd
  */
-@RunWith(MockitoJUnitRunner.class)
 public class BlackjackGameTest
 {
 }

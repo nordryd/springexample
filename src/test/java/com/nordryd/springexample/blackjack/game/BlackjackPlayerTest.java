@@ -1,16 +1,15 @@
 package com.nordryd.springexample.blackjack.game;
 
-import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Rank;
-import static com.nordryd.springexample.blackjack.game.BlackjackDeck.Card.Suit;
+import static com.nordryd.springexample.gameobjects.Card.Rank;
+import static com.nordryd.springexample.gameobjects.Card.Suit;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.nordryd.springexample.blackjack.game.BlackjackDeck.Card;
+import com.nordryd.springexample.gameobjects.Card;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class BlackjackPlayerTest
 {
-    private static final Card INIT_CARD = getCard(Rank.NINE, Suit.HEART);
+    private static final Card INIT_CARD = Card.get(Rank.NINE).of(Suit.HEARTS);
 
     @Mock
     private BlackjackGame mockGame;
@@ -52,7 +51,7 @@ public class BlackjackPlayerTest
 
     @Test
     public void testPlayerHitNoBust() {
-        Card cardFromHit = getCard(Rank.TWO, Suit.SPADE);
+        Card cardFromHit = Card.get(Rank.TWO).of(Suit.SPADES);
         setNextDraw(cardFromHit);
         player.hit();
         assertThat(player.getHand(), is(asList(INIT_CARD, INIT_CARD, cardFromHit)));
@@ -77,12 +76,5 @@ public class BlackjackPlayerTest
 
     private void setNextDraw(final Card card) {
         when(mockDeck.draw()).thenReturn(card);
-    }
-
-    private static Card getCard(final Rank rank, final Suit suit) {
-        final Card card = mock(Card.class);
-        when(card.getRank()).thenReturn(rank);
-        when(card.getSuit()).thenReturn(suit);
-        return card;
     }
 }

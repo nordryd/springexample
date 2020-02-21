@@ -12,12 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
  *
  * @author Nordryd
  */
-@RunWith(MockitoJUnitRunner.class)
 public class BlackjackControllerTest
 {
-    @Mock
-    private BlackjackService stuntService;
-
-    @InjectMocks
-    private BlackjackController controller;
 }
