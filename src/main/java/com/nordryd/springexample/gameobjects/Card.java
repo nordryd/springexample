@@ -1,11 +1,14 @@
 package com.nordryd.springexample.gameobjects;
 
+import static com.nordryd.springexample.gameobjects.Card.BattleResult.LOSE;
+import static com.nordryd.springexample.gameobjects.Card.BattleResult.TIE;
+import static com.nordryd.springexample.gameobjects.Card.BattleResult.WIN;
 import static java.lang.String.format;
 import static java.util.Objects.hash;
 
 /**
  * <p>
- * Represents a single playing
+ * Represents a single playing card from a standard 52 card deck.
  * </p>
  *
  * @author Nordryd
@@ -35,18 +38,32 @@ public class Card
     }
 
     /**
-     * Pits the current {@link Card} against another.
+     * Pits the current {@link Card} against another in glorious combat.
      *
      * @param opponent the opposing {@link Card} to battle.
-     * @param acesAreHigh {@code true} if aces are <i>HIGH</i> for this battle.
-     * @return the {@link BattleResult result of the battle} (win, lose, or tie).
+     * @param isAceHigh {@code true} if aces are <i>HIGH</i> for this battle.
+     * @return the {@link BattleResult resolution} of the battle (win, lose, or tie).
      */
-    public BattleResult battle(final Card opponent, final boolean acesAreHigh) {
-        return null;
+    public BattleResult battle(final Card opponent, final boolean isAceHigh) {
+        if (this.equals(opponent)) {
+            return TIE;
+        }
+
+        final boolean ranksEqual = rank.equals(opponent.rank);
+        if (ranksEqual && (!suit.equals(opponent.suit) && suit.beats(opponent.suit))) {
+            return WIN;
+        }
+
+        final boolean rankWins = rank.beats(opponent.rank, isAceHigh);
+        if (!ranksEqual && !rankWins) {
+            return LOSE;
+        }
+
+        return (suit.equals(opponent.suit) && rankWins) ? WIN : rankWins ? WIN : LOSE;
     }
 
     /**
-     * Pits the current {@link Card} against another. <b>Aces will be treated as <i>HIGH</i></b>.
+     * Pits the current {@link Card} against another in glorious combat. <b>Aces will be treated as <i>HIGH</i></b>.
      *
      * @param opponent the opposing {@link Card} to battle.
      * @return the {@link BattleResult result of the battle} (win, lose, or tie).
@@ -121,28 +138,10 @@ public class Card
             return strength;
         }
 
-        private boolean beats(final Rank rank, final boolean acesAreHigh) {
-            return false;
+        private boolean beats(final Rank opponent, final boolean isAceHigh) {
+            return ((!isAceHigh && ACE.equals(this)) ? 1 : strength) >
+                    ((!isAceHigh && ACE.equals(opponent)) ? 1 : opponent.strength);
         }
-    }
-
-    /**
-     * The possible outcomes of a {@link Card} battle.
-     */
-    public enum BattleResult
-    {
-        /**
-         * If the current {@link Card} won.
-         */
-        WIN,
-        /**
-         * If the current {@link Card} lost.
-         */
-        LOSE,
-        /**
-         * If the battle resulted in a tie.
-         */
-        TIE;
     }
 
     /**
@@ -161,9 +160,28 @@ public class Card
             this.strength = strength;
         }
 
-        private boolean beats(final Suit suit) {
-            return false;
+        private boolean beats(final Suit opponent) {
+            return strength > opponent.strength;
         }
+    }
+
+    /**
+     * The possible outcomes of a {@link Card} battle.
+     */
+    public enum BattleResult
+    {
+        /**
+         * If the attacking {@link Card} won.
+         */
+        WIN,
+        /**
+         * If the attacking {@link Card} lost.
+         */
+        LOSE,
+        /**
+         * If the battle resulted in a tie.
+         */
+        TIE;
     }
 
     /**

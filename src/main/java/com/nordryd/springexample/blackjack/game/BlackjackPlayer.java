@@ -78,13 +78,13 @@ public class BlackjackPlayer
      */
     protected void draw() {
         hand.add(game.getDeck().draw());
-        tick();
+        update();
     }
 
     /**
      * Update this player's state.
      */
-    private void tick() {
+    private void update() {
         int handValue = 0;
         final Iterator<Card> handIter = hand.iterator();
         while ((handValue < BLACKJACK_NO) && handIter.hasNext()) {

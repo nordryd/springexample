@@ -32,7 +32,7 @@ public class CardTest
         final Suit expectedSuit = Suit.SPADES;
         final Card card = Card.get(expectedRank).of(expectedSuit);
         multiAssert.checkThat(card.getRank(), is(expectedRank));
-        multiAssert.checkThat(card.getRank(), is(expectedSuit));
+        multiAssert.checkThat(card.getSuit(), is(expectedSuit));
     }
 
     @Test
@@ -53,6 +53,36 @@ public class CardTest
                 expectedHigherCard.battle(expectedLowerCard), is(BattleResult.WIN));
         multiAssert.checkThat(getBattleString(expectedLowerCard, expectedHigherCard),
                 expectedLowerCard.battle(expectedHigherCard), is(BattleResult.LOSE));
+    }
+
+    @Test
+    public void testBattleSameRankAcesHigh() {
+        final Card expectedHigherCard = Card.get(Rank.ACE).of(Suit.HEARTS);
+        final Card expectedLowerCard = Card.get(Rank.ACE).of(Suit.DIAMONDS);
+        multiAssert.checkThat(getBattleString(expectedHigherCard, expectedLowerCard),
+                expectedHigherCard.battle(expectedLowerCard), is(BattleResult.WIN));
+        multiAssert.checkThat(getBattleString(expectedLowerCard, expectedHigherCard),
+                expectedLowerCard.battle(expectedHigherCard), is(BattleResult.LOSE));
+    }
+
+    @Test
+    public void testBattleSameRankAcesHighOverloaded() {
+        final Card expectedHigherCard = Card.get(Rank.ACE).of(Suit.HEARTS);
+        final Card expectedLowerCard = Card.get(Rank.ACE).of(Suit.DIAMONDS);
+        multiAssert.checkThat(getBattleString(expectedHigherCard, expectedLowerCard),
+                expectedHigherCard.battle(expectedLowerCard, true), is(BattleResult.WIN));
+        multiAssert.checkThat(getBattleString(expectedLowerCard, expectedHigherCard),
+                expectedLowerCard.battle(expectedHigherCard, true), is(BattleResult.LOSE));
+    }
+
+    @Test
+    public void testBattleSameRankAcesLow() {
+        final Card expectedHigherCard = Card.get(Rank.ACE).of(Suit.HEARTS);
+        final Card expectedLowerCard = Card.get(Rank.ACE).of(Suit.DIAMONDS);
+        multiAssert.checkThat(getBattleString(expectedHigherCard, expectedLowerCard),
+                expectedHigherCard.battle(expectedLowerCard, false), is(BattleResult.WIN));
+        multiAssert.checkThat(getBattleString(expectedLowerCard, expectedHigherCard),
+                expectedLowerCard.battle(expectedHigherCard, false), is(BattleResult.LOSE));
     }
 
     @Test
@@ -128,25 +158,33 @@ public class CardTest
     @Test
     public void testBattleTie() {
         final Card card = Card.get(Rank.EIGHT).of(Suit.CLUBS);
-        assertThat(card.battle(card), is(BattleResult.TIE));
+        final Card otherCard = Card.get(Rank.EIGHT).of(Suit.CLUBS);
+        multiAssert.checkThat(getBattleString(card, otherCard), card.battle(otherCard), is(BattleResult.TIE));
+        multiAssert.checkThat(getBattleString(otherCard, card), otherCard.battle(card), is(BattleResult.TIE));
     }
 
     @Test
     public void testBattleTieAcesHigh() {
-        final Card card = Card.get(Rank.ACE).of(Suit.HEARTS);
-        assertThat(getBattleString(card, card), card.battle(card, true), is(BattleResult.TIE));
+        final Card card = Card.get(Rank.ACE).of(Suit.CLUBS);
+        final Card otherCard = Card.get(Rank.ACE).of(Suit.CLUBS);
+        multiAssert.checkThat(getBattleString(card, otherCard), card.battle(otherCard), is(BattleResult.TIE));
+        multiAssert.checkThat(getBattleString(otherCard, card), otherCard.battle(card), is(BattleResult.TIE));
     }
 
     @Test
     public void testBattleTieAcesHighOverloaded() {
-        final Card card = Card.get(Rank.ACE).of(Suit.HEARTS);
-        assertThat(getBattleString(card, card), card.battle(card), is(BattleResult.TIE));
+        final Card card = Card.get(Rank.ACE).of(Suit.CLUBS);
+        final Card otherCard = Card.get(Rank.ACE).of(Suit.CLUBS);
+        multiAssert.checkThat(getBattleString(card, otherCard), card.battle(otherCard, true), is(BattleResult.TIE));
+        multiAssert.checkThat(getBattleString(otherCard, card), otherCard.battle(card, true), is(BattleResult.TIE));
     }
 
     @Test
     public void testBattleTieAcesLow() {
-        final Card card = Card.get(Rank.ACE).of(Suit.HEARTS);
-        assertThat(getBattleString(card, card), card.battle(card, false), is(BattleResult.TIE));
+        final Card card = Card.get(Rank.ACE).of(Suit.CLUBS);
+        final Card otherCard = Card.get(Rank.ACE).of(Suit.CLUBS);
+        multiAssert.checkThat(getBattleString(card, otherCard), card.battle(otherCard, false), is(BattleResult.TIE));
+        multiAssert.checkThat(getBattleString(otherCard, card), otherCard.battle(card, false), is(BattleResult.TIE));
     }
 
     @Test
