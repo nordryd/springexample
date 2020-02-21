@@ -2,9 +2,12 @@ package com.nordryd.springexample.gameobjects.deck;
 
 import static com.nordryd.springexample.gameobjects.Card.Rank;
 import static com.nordryd.springexample.gameobjects.Card.Suit;
+import static java.lang.System.out;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toMap;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nordryd.springexample.gameobjects.Card;
 
@@ -18,12 +21,32 @@ import com.nordryd.springexample.gameobjects.Card;
 public class StandardDeck implements Deck
 {
     private static final List<Card> ALL_POSSIBLE_CARDS;
+    private static final int STD_DECK_SIZE;
+
+    private final Map<Card, Integer> deckCardCounts;
+    private final int countPerCard;
+    private int size;
+
+    /**
+     * Constructor.
+     */
+    public StandardDeck() {
+        this.countPerCard = 1;
+        this.size = countPerCard * STD_DECK_SIZE;
+        this.deckCardCounts = ALL_POSSIBLE_CARDS.stream().collect(toMap(card -> card, card -> countPerCard));
+    }
 
     // for just one of each, use a list and remove each time you draw a card, and reset when the list is empty
     // for multiple instances of each, use a map and decrement each time you pull from it
+    // maybe make a BigStandardDeck that's a composition of StandardDecks? maybe... that'd be kind of sketchy bc you'd have to track each deck, and presumably the deck will auto reset when it empties
     @Override
     public Card draw() {
         return null;
+    }
+
+    private void resetDeck() {
+        deckCardCounts.forEach((card, count) -> deckCardCounts.replace(card, countPerCard));
+        deckCardCounts.forEach((card, count) -> out.printf("There are %d %s\n", count, card));
     }
 
     static {
@@ -83,5 +106,6 @@ public class StandardDeck implements Deck
             Card.get(Rank.ACE).of(Suit.SPADES)
         );
         //@formatter:on
+        STD_DECK_SIZE = ALL_POSSIBLE_CARDS.size();
     }
 }

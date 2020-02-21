@@ -7,7 +7,6 @@ import static com.nordryd.springexample.gameobjects.Card.get;
 import java.util.Random;
 
 import com.nordryd.springexample.gameobjects.Card;
-import com.nordryd.springexample.gameobjects.deck.Deck;
 
 /**
  * <p>
