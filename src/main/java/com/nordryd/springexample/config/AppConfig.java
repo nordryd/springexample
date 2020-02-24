@@ -1,8 +1,8 @@
 package com.nordryd.springexample.config;
 
-import com.nordryd.springexample.blackjack.game.BlackjackPlayer;
+import java.util.Random;
+
 import com.nordryd.springexample.gameobjects.deck.Deck;
-import com.nordryd.springexample.gameobjects.deck.SimpleDeck;
 import com.nordryd.springexample.gameobjects.deck.StandardDeck;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -20,12 +20,12 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
     @Bean
-    public Deck simpleDeck() {
-        return new SimpleDeck();
+    public Deck deck() {
+        return new StandardDeck(rng());
     }
 
     @Bean
-    public Deck standardDeck() {
-        return new StandardDeck();
+    public Random rng() {
+        return new Random();
     }
 }

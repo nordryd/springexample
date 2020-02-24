@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.nordryd.springexample.gameobjects.Card;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -18,12 +19,23 @@ import com.nordryd.springexample.gameobjects.Card;
  *
  * @author Nordryd
  */
-public class SimpleDeck implements Deck {
-    private static final Random RNG = new Random();
+public class SimpleDeck implements Deck
+{
+    private final Random rng;
+
+    /**
+     * Constructor.
+     *
+     * @param rng a {@link Random random number generator}.
+     */
+    public SimpleDeck(final Random rng) {
+        this.rng = rng;
+    }
 
     @Override
     public Card draw() {
-        return get(Rank.values()[RNG.nextInt(Rank.values().length)]).of(Suit.values()[RNG.nextInt(Suit.values().length)]);
+        return get(Rank.values()[rng.nextInt(Rank.values().length)])
+                .of(Suit.values()[rng.nextInt(Suit.values().length)]);
     }
 
     @Override

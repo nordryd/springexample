@@ -3,17 +3,23 @@ package com.nordryd.springexample.gameobjects.deck;
 import static com.nordryd.springexample.gameobjects.Card.Rank;
 import static com.nordryd.springexample.gameobjects.Card.Suit;
 import static java.util.Arrays.asList;
-import static java.util.stream.IntStream.range;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.intThat;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Random;
 
 import com.nordryd.springexample.gameobjects.Card;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * <p>
@@ -22,32 +28,38 @@ import org.junit.rules.ExpectedException;
  *
  * @author Nordryd
  */
-public class SimpleDeckTest {
+@RunWith(MockitoJUnitRunner.class)
+public class SimpleDeckTest
+{
     private static final List<Rank> POSSIBLE_RANKS = asList(Rank.values());
     private static final List<Suit> POSSIBLE_SUITS = asList(Suit.values());
-    private static final int STD_DECK_SIZE = 52;
+
+    private static final ArgumentMatcher<Integer> isPositive = value -> value > 0;
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
+
+    @Mock
+    private Random mockRng;
 
     public Deck deck;
 
     @Before
     public void setup() {
-        deck = new SimpleDeck();
+        setRandomIntToGenerate(0);
     }
 
     @Test
     public void testDraw() {
-        final int testRuns = STD_DECK_SIZE * 5;
-        range(0, testRuns).mapToObj(i -> deck.draw()).forEach(card -> {
-            assertThat(isCardValid(card), is(true));
-            assertThat(deck.remainingCards(), is(Integer.MAX_VALUE));
-        });
+        final int numberToGen = 2;
+        setRandomIntToGenerate(numberToGen);
+        deck = new SimpleDeck(mockRng);
+        assertThat(deck.draw(), is(Card.get(Rank.values()[numberToGen]).of(Suit.values()[numberToGen])));
     }
 
     @Test
     public void testDrawMultiple() {
+        deck = new SimpleDeck(mockRng);
         deck.draw(16).forEach(card -> assertThat(isCardValid(card), is(true)));
     }
 
@@ -55,17 +67,26 @@ public class SimpleDeckTest {
     public void testDrawMultipleZero() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Cannot draw 0 cards.");
-        deck.draw(0);
+        new SimpleDeck(mockRng).draw(0);
     }
 
     @Test
     public void testDrawMultipleNegative() {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Cannot draw a negative number of cards.");
-        deck.draw(-1);
+        new SimpleDeck(mockRng).draw(-1);
     }
 
     private boolean isCardValid(final Card card) {
         return POSSIBLE_RANKS.contains(card.getRank()) && POSSIBLE_SUITS.contains(card.getSuit());
+    }
+
+    private void setRandomIntToGenerate(final int numberToGen) {
+        if (numberToGen > 0) {
+            when(mockRng.nextInt(intThat(integer -> integer > 0))).thenReturn(numberToGen);
+        }
+        else {
+            when(mockRng.nextInt(intThat(integer -> integer > 0))).thenCallRealMethod();
+        }
     }
 }

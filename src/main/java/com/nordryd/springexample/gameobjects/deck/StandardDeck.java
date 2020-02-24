@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import com.nordryd.springexample.gameobjects.Card;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -22,14 +23,14 @@ import com.nordryd.springexample.gameobjects.Card;
  *
  * @author Nordryd
  */
-public class StandardDeck implements Deck {
-    private static final Random RNG = new Random();
+public class StandardDeck implements Deck
+{
     private static final List<Card> ALL_POSSIBLE_CARDS;
     private static final int STD_DECK_SIZE;
 
+    private final Random rng;
     private final boolean looparoundWhenEmpty;
     private final List<Card> cards;
-
 
     /**
      * Constructor.
@@ -38,21 +39,25 @@ public class StandardDeck implements Deck {
      * <li>{@code true} - the deck will reset automatically when the last card is drawn and proceed drawing as normal.</li>
      * <li>{@code false} - the deck will remain empty when the last card is drawn and must be manually reset with {@link StandardDeck#reset()}.</li>
      * </ul>
+     * @param rng a {@link Random random number generator}.
      */
-    public StandardDeck(final boolean looparoundWhenEmpty) {
+    public StandardDeck(final boolean looparoundWhenEmpty, final Random rng) {
         this.looparoundWhenEmpty = looparoundWhenEmpty;
+        this.rng = rng;
         this.cards = new ArrayList<>();
         reset();
     }
 
     /**
      * Constructor. When there are no more remaining cards to draw, the deck will automatically reset when the last card and proceed drawing cards as normal.
+     *
+     * @param rng a {@link Random random number generator}.
      */
-    public StandardDeck() {
-        this(true);
+    @Autowired
+    public StandardDeck(final Random rng) {
+        this(true, rng);
     }
 
-    @Override
     public Card draw() {
         if (isEmpty(cards)) {
             if (looparoundWhenEmpty) {
@@ -63,7 +68,7 @@ public class StandardDeck implements Deck {
             }
         }
 
-        final Card card = cards.get(RNG.nextInt(cards.size()));
+        final Card card = cards.get(rng.nextInt(cards.size()));
         cards.remove(card);
         return card;
     }
