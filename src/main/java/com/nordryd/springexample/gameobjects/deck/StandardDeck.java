@@ -2,51 +2,111 @@ package com.nordryd.springexample.gameobjects.deck;
 
 import static com.nordryd.springexample.gameobjects.Card.Rank;
 import static com.nordryd.springexample.gameobjects.Card.Suit;
-import static java.lang.System.out;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 
 import com.nordryd.springexample.gameobjects.Card;
 
 /**
  * <p>
- * A standard 52-{@link Card card} {@link Deck}. This deck will cycle through all 52 cards at least one
+ * A standard 52-{@link Card card} {@link Deck deck}. This deck will cycle through all 52 cards at least one
  * </p>
  *
  * @author Nordryd
  */
-public class StandardDeck implements Deck
-{
+public class StandardDeck implements Deck {
+    private static final Random RNG = new Random();
     private static final List<Card> ALL_POSSIBLE_CARDS;
     private static final int STD_DECK_SIZE;
 
-    private final Map<Card, Integer> deckCardCounts;
-    private final int countPerCard;
-    private int size;
+    private final boolean looparoundWhenEmpty;
+    private final List<Card> cards;
+
 
     /**
      * Constructor.
+     *
+     * @param looparoundWhenEmpty <ul>
+     * <li>{@code true} - the deck will reset automatically when the last card is drawn and proceed drawing as normal.</li>
+     * <li>{@code false} - the deck will remain empty when the last card is drawn and must be manually reset with {@link StandardDeck#reset()}.</li>
+     * </ul>
+     */
+    public StandardDeck(final boolean looparoundWhenEmpty) {
+        this.looparoundWhenEmpty = looparoundWhenEmpty;
+        this.cards = new ArrayList<>();
+        reset();
+    }
+
+    /**
+     * Constructor. When there are no more remaining cards to draw, the deck will automatically reset when the last card and proceed drawing cards as normal.
      */
     public StandardDeck() {
-        this.countPerCard = 1;
-        this.size = countPerCard * STD_DECK_SIZE;
-        this.deckCardCounts = ALL_POSSIBLE_CARDS.stream().collect(toMap(card -> card, card -> countPerCard));
+        this(true);
     }
 
-    // for just one of each, use a list and remove each time you draw a card, and reset when the list is empty
-    // for multiple instances of each, use a map and decrement each time you pull from it
-    // maybe make a BigStandardDeck that's a composition of StandardDecks? maybe... that'd be kind of sketchy bc you'd have to track each deck, and presumably the deck will auto reset when it empties
     @Override
     public Card draw() {
-        return null;
+        if (isEmpty(cards)) {
+            if (looparoundWhenEmpty) {
+                reset();
+            }
+            else {
+                throw new DeckException("There are no more cards to draw! Use reset() to reset the deck.");
+            }
+        }
+
+        final Card card = cards.get(RNG.nextInt(cards.size()));
+        cards.remove(card);
+        return card;
     }
 
-    private void resetDeck() {
-        deckCardCounts.forEach((card, count) -> deckCardCounts.replace(card, countPerCard));
-        deckCardCounts.forEach((card, count) -> out.printf("There are %d %s\n", count, card));
+    @Override
+    public List<Card> draw(final int amount) {
+        if (amount == 0) {
+            throw new DeckException("Cannot draw 0 cards.");
+        }
+
+        if (amount < 0) {
+            throw new DeckException("Cannot draw a negative number of cards.");
+        }
+
+        if (!looparoundWhenEmpty) {
+            if (isEmpty(cards)) {
+                throw new DeckException("There are no more cards to draw! Use reset() to reset the deck.");
+            }
+
+            if (amount > STD_DECK_SIZE) {
+                throw new DeckException("53 cards were requested when there can be no more than 52.");
+            }
+
+            if (amount > cards.size()) {
+                throw new DeckException(
+                        format("%d cards were requested, but only %s. Use reset() to reset the deck.", amount,
+                                (cards.size() == 1) ? "1 remains" : cards.size() + " remain"));
+            }
+        }
+        return range(0, amount).mapToObj(iteration -> draw()).filter(Objects::nonNull).collect(toList());
+    }
+
+    @Override
+    public int remainingCards() {
+        return cards.size();
+    }
+
+    /**
+     * Resets the deck back to 52 cards.
+     */
+    public void reset() {
+        cards.clear();
+        cards.addAll(ALL_POSSIBLE_CARDS);
     }
 
     static {

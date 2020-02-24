@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
  * @author Nordryd
  */
 @Component
-public class BlackjackGame implements ApplicationContextAware
-{
+public class BlackjackGame implements ApplicationContextAware {
     private ApplicationContext context;
 
     private final BlackjackDeck deck;
@@ -32,8 +31,8 @@ public class BlackjackGame implements ApplicationContextAware
     @Autowired
     public BlackjackGame(final BlackjackDeck deck, final BlackjackPlayer player, final BlackjackDealer dealer) {
         this.deck = deck;
-        this.player = player;
-        this.dealer = dealer;
+        this.player = new BlackjackPlayer(this);
+        this.dealer = new BlackjackDealer(this);
         this.gameState = GameState.PLAYER_TURN;
     }
 
@@ -49,12 +48,13 @@ public class BlackjackGame implements ApplicationContextAware
         this.context = context;
     }
 
-    private enum GameState
-    {
+    private enum GameState {
         // player has 21 but dealer REVEALS 21, dealer wins
-        // player has 21 but dealer DRAWS 21, it's a tie
+        // player has 21 but dealer DRAWS 21, it's a push
+        // push = player "wins" (in reality, bets are returned and that's the end of it)
         PLAYER_TURN,
         DEALER_TURN,
-        FINISHED;
+        FINISHED,
+        PUSH
     }
 }

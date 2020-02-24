@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.nordryd.springexample.gameobjects.Card;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>

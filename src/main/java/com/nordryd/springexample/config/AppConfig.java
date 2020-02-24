@@ -1,5 +1,6 @@
 package com.nordryd.springexample.config;
 
+import com.nordryd.springexample.blackjack.game.BlackjackPlayer;
 import com.nordryd.springexample.gameobjects.deck.Deck;
 import com.nordryd.springexample.gameobjects.deck.SimpleDeck;
 import com.nordryd.springexample.gameobjects.deck.StandardDeck;
