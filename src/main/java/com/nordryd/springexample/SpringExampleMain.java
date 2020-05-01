@@ -1,5 +1,9 @@
 package com.nordryd.springexample;
 
+import com.nordryd.springexample.colorcalculator.ColorCalculatorController;
+import com.nordryd.springexample.example.HelloWorldPrintingService;
+import com.nordryd.springexample.example.IDontLikeSandPrintingService;
+import com.nordryd.springexample.example.PrintingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +30,10 @@ public class SpringExampleMain
      */
     public static void main(final String... args) {
         final ApplicationContext config = new AnnotationConfigApplicationContext(Config.class);
-        SpringApplication.run(SpringExampleMain.class, args);
+        final PrintingService printingService = config.getBean(PrintingService.class);
+        printingService.print();
+        printingService.print("fucktards");
+        SpringApplication.run(new Class[] { SpringExampleMain.class, ColorCalculatorController.class }, args);
     }
 
     /**
@@ -42,6 +49,11 @@ public class SpringExampleMain
         @Bean
         public String test() {
             return "If this printed out, it means the bean was successfully retrieved.";
+        }
+
+        @Bean
+        public PrintingService printingService() {
+            return new IDontLikeSandPrintingService();
         }
     }
 }
