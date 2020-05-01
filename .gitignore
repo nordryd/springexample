@@ -9,7 +9,7 @@
 **.iml
 
 # Build Target
-/target/
+**/target/
 
 # BlueJ files
 *.ctxt
