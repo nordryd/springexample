@@ -2,6 +2,7 @@ package com.nordryd.springexample.factorydepinj;
 
 import com.nordryd.springexample.factorydepinj.controller.CalculatorController;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * <p>
@@ -10,6 +11,7 @@ import org.springframework.boot.SpringApplication;
  *
  * @author Nordryd
  */
+@SpringBootApplication
 public class CalculatorMain
 {
     /**
@@ -18,6 +20,6 @@ public class CalculatorMain
      * @param args command line arguments.
      */
     public static void main(final String... args) {
-        SpringApplication.run(CalculatorController.class, args);
+        SpringApplication.run(new Class[] { CalculatorMain.class, CalculatorController.class }, args);
     }
 }
