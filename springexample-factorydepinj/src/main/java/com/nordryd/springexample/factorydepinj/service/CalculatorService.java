@@ -28,16 +28,19 @@ public class CalculatorService
     }
 
     public int subtract(final int... values) {
-        return 0;
+        return depInjector.getMathAgent().subtract(values);
     }
 
     public int multiply(final int... values) {
         // shift by 2 for mult by 2
-        return 0;
+        return depInjector.getMathAgent().multiply(values);
     }
 
-    public int average(final int... values) {
-        // average in stream
-        return 0;
+    public int square(final int value) {
+        return depInjector.getMathAgent().square(value);
+    }
+
+    public int exponent(final int value, final int exponent) {
+        return depInjector.getMathAgent().exponent(value, exponent);
     }
 }

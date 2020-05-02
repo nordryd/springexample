@@ -42,19 +42,30 @@ public class CalculatorController
     @ResponseBody
     @ResponseStatus(OK)
     public int subtract(@RequestParam("values[]") final int... values) {
-        return depInjector.getService().add(values);
+        return depInjector.getService().subtract(values);
     }
 
     @GetMapping("/multiply")
     @ResponseBody
     @ResponseStatus(OK)
     public int multiply(@RequestParam("values[]") final int... values) {
-        return depInjector.getService().add(values);
+        return depInjector.getService().multiply(values);
     }
 
-    /**
-     * @return HALP!
-     */
+    @GetMapping("/multiply")
+    @ResponseBody
+    @ResponseStatus(OK)
+    public int square(@RequestParam("value") final int value) {
+        return depInjector.getService().square(value);
+    }
+
+    @GetMapping("/multiply")
+    @ResponseBody
+    @ResponseStatus(OK)
+    public int exponent(@RequestParam("value") final int value, @RequestParam("exp") final int exponent) {
+        return depInjector.getService().exponent(value, exponent);
+    }
+
     @GetMapping("/help")
     @ResponseStatus(OK)
     @ResponseBody

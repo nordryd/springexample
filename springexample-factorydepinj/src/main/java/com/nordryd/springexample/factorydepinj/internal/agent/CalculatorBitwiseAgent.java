@@ -21,4 +21,20 @@ public class CalculatorBitwiseAgent
     public CalculatorBitwiseAgent(final CalculatorDependencyInjector depInjector) {
         this.depInjector = depInjector;
     }
+
+    public int leftShift(final int value) {
+        return leftShift(value, 1);
+    }
+
+    public int leftShift(final int value, final int places) {
+        return value << places;
+    }
+
+    public int rightShift(final int value) {
+        return rightShift(value, 1);
+    }
+
+    public int rightShift(final int value, final int places) {
+        return value >> places;
+    }
 }

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * <p>
- * Application that calculates various calculations that must be calculatingly calculated in a calculated manner.
+ * Main class for spring modules.
  * </p>
  *
  * @author Nordryd

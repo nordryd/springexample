@@ -29,16 +29,40 @@ public class CalculatorBasicMathAgent
     }
 
     public int subtract(final int... values) {
-        return Integer.MAX_VALUE;
+        int difference = values[0];
+        for (int i = 1; i < values.length; i++) {
+            difference -= values[i];
+        }
+        return difference;
     }
 
     public int multiply(final int... values) {
-        // shift by 2 for mult by 2
-        return Integer.MAX_VALUE;
+        if (values[0] == 0) {
+            return 0;
+        }
+        int product = values[0];
+        for (int i = 1; i < values.length; i++) {
+            int value = values[i];
+            if (value == 0) {
+                return 0;
+            }
+            product *= value;
+        }
+        return product;
     }
 
-    public int average(final int... values) {
-        // average in stream
-        return Integer.MAX_VALUE;
+    public int square(final int value) {
+        return exponent(value, 2);
+    }
+
+    public int exponent(final int value, final int exponent) {
+        if ((value == 0) || (exponent == 0)) {
+            return 0;
+        }
+        int product = value;
+        for (int i = 1; i < exponent; i++) {
+            product *= value;
+        }
+        return product;
     }
 }
