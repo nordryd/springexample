@@ -1,13 +1,13 @@
 package com.nordryd.springexample.factorydepinj.internal.injector;
 
-import com.nordryd.springexample.factorydepinj.CalculatorMain;
+import com.nordryd.springexample.factorydepinj.SpringExampleMain;
 import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBasicMathAgent;
 import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBitwiseAgent;
 import com.nordryd.springexample.factorydepinj.service.CalculatorService;
 
 /**
  * <p>
- * Dependency getters for the {@link CalculatorMain Calculator app}. This facilitates dependency injection with just pure java (or the way things are currently done).
+ * Dependency getters for the {@link SpringExampleMain Calculator app}. This facilitates dependency injection with just pure java (or the way things are currently done).
  * This would be replaced by either a Spring config, or by component annotations.
  * </p>
  *

@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Nordryd
  */
 @SpringBootApplication
-public class CalculatorMain
+public class SpringExampleMain
 {
     /**
      * Main method.
@@ -20,6 +20,6 @@ public class CalculatorMain
      * @param args command line arguments.
      */
     public static void main(final String... args) {
-        SpringApplication.run(new Class[] { CalculatorMain.class, CalculatorController.class }, args);
+        SpringApplication.run(new Class[] { SpringExampleMain.class, CalculatorController.class }, args);
     }
 }
