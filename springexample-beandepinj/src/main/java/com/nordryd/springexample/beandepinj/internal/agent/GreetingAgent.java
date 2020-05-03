@@ -1,4 +1,4 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 /**
  * <p>

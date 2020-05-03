@@ -1,8 +1,8 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 import static java.lang.String.format;
 
-import com.nordryd.springexample.factorydepinj.internal.injector.GreetingDependencyInjector;
+import com.nordryd.springexample.beandepinj.config.GreetingConfig;
 
 /**
  * <p>
@@ -14,16 +14,6 @@ import com.nordryd.springexample.factorydepinj.internal.injector.GreetingDepende
 public class NormalGreetingAgent implements GreetingAgent
 {
     private static final String GREETING = "Greetings, %s!";
-    private final GreetingDependencyInjector depInjector;
-
-    /**
-     * Constructor.
-     *
-     * @param depInjector a {@link GreetingDependencyInjector}.
-     */
-    public NormalGreetingAgent(final GreetingDependencyInjector depInjector) {
-        this.depInjector = depInjector;
-    }
 
     @Override
     public String helloWorld() {

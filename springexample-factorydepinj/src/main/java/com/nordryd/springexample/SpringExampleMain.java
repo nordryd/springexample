@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * <p>
- * Main class for the Bean Dependency Injection version of this app.
+ * Main class for the Factory Dependency Injection version of this app.
  * </p>
  * <p>
  * This incarnation uses the {@link GreetingDependencyInjector dependency factory} that we use now, passing a class

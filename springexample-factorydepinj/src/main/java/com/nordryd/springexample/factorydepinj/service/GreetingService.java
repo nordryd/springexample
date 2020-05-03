@@ -1,7 +1,5 @@
 package com.nordryd.springexample.factorydepinj.service;
 
-import static java.util.Optional.ofNullable;
-
 import com.nordryd.springexample.SpringExampleMain;
 import com.nordryd.springexample.factorydepinj.internal.injector.GreetingDependencyInjector;
 
@@ -23,5 +21,17 @@ public class GreetingService
      */
     public GreetingService(final GreetingDependencyInjector depInjector) {
         this.depInjector = depInjector;
+    }
+
+    public String helloWorld() {
+        return depInjector.getAgent().helloWorld();
+    }
+
+    public String greet(final String who) {
+        return depInjector.getAgent().greet(who);
+    }
+
+    public String sand() {
+        return depInjector.getAgent().sand();
     }
 }

@@ -1,8 +1,6 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 import static java.lang.String.format;
-
-import com.nordryd.springexample.factorydepinj.internal.injector.GreetingDependencyInjector;
 
 /**
  * <p>
@@ -14,16 +12,6 @@ import com.nordryd.springexample.factorydepinj.internal.injector.GreetingDepende
 public class UwuGreetingAgent implements GreetingAgent
 {
     private static final String GREETING = "Greetings, %s!";
-    private final GreetingDependencyInjector depInjectow;
-
-    /**
-     * Constwuctow.
-     *
-     * @param depInjectow a {@link GreetingDependencyInjector GweetingDependencyInjectow}.
-     */
-    public UwuGreetingAgent(final GreetingDependencyInjector depInjectow) {
-        this.depInjectow = depInjectow;
-    }
 
     @Override
     public String helloWorld() {
@@ -40,7 +28,7 @@ public class UwuGreetingAgent implements GreetingAgent
         return uwuTranslator("I don't like sand... it's coarse, rough, and irritating... and it gets everywhere.");
     }
 
-    private String uwuTranslator(final String string) {
+    private static String uwuTranslator(final String string) {
         return string.replaceAll("[rl]", "w").replaceAll("[RL]", "W").replaceAll("th", "d").replaceAll("Th", "D");
     }
 }
