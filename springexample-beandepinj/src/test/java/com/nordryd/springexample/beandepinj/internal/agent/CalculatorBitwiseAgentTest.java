@@ -1,8 +1,8 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
+import com.nordryd.springexample.beandepinj.internal.injector.CalculatorDependencyInjector;
 import org.junit.jupiter.api.Test;
 
 /**

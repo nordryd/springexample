@@ -1,9 +1,9 @@
-package com.nordryd.springexample.factorydepinj.internal.injector;
+package com.nordryd.springexample.beandepinj.internal.injector;
 
 import com.nordryd.springexample.SpringExampleMain;
-import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBasicMathAgent;
-import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBitwiseAgent;
-import com.nordryd.springexample.factorydepinj.service.CalculatorService;
+import com.nordryd.springexample.beandepinj.internal.agent.CalculatorBasicMathAgent;
+import com.nordryd.springexample.beandepinj.internal.agent.CalculatorBitwiseAgent;
+import com.nordryd.springexample.beandepinj.service.CalculatorService;
 
 /**
  * <p>

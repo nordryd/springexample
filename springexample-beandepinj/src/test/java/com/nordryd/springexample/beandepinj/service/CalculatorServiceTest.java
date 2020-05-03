@@ -1,12 +1,12 @@
-package com.nordryd.springexample.factorydepinj.service;
+package com.nordryd.springexample.beandepinj.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
-import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBasicMathAgent;
-import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBitwiseAgent;
-import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
+import com.nordryd.springexample.beandepinj.internal.agent.CalculatorBasicMathAgent;
+import com.nordryd.springexample.beandepinj.internal.agent.CalculatorBitwiseAgent;
+import com.nordryd.springexample.beandepinj.internal.injector.CalculatorDependencyInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

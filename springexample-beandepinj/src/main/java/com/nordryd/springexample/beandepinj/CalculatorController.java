@@ -1,4 +1,4 @@
-package com.nordryd.springexample.factorydepinj;
+package com.nordryd.springexample.beandepinj;
 
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpStatus.OK;

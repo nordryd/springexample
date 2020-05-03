@@ -1,9 +1,9 @@
-package com.nordryd.springexample.factorydepinj.service;
+package com.nordryd.springexample.beandepinj.service;
 
 import static java.util.Optional.ofNullable;
 
 import com.nordryd.springexample.SpringExampleMain;
-import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
+import com.nordryd.springexample.beandepinj.internal.injector.CalculatorDependencyInjector;
 
 /**
  * <p>

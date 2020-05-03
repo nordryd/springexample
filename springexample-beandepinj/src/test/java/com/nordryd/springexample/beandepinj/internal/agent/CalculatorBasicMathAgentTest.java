@@ -1,4 +1,4 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
+import com.nordryd.springexample.beandepinj.internal.injector.CalculatorDependencyInjector;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

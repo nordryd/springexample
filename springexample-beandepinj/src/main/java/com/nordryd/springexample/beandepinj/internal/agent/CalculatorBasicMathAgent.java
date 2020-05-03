@@ -1,8 +1,8 @@
-package com.nordryd.springexample.factorydepinj.internal.agent;
+package com.nordryd.springexample.beandepinj.internal.agent;
 
 import static java.util.Arrays.stream;
 
-import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
+import com.nordryd.springexample.beandepinj.internal.injector.CalculatorDependencyInjector;
 
 /**
  * <p>

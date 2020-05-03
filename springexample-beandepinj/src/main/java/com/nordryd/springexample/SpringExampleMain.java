@@ -1,6 +1,6 @@
 package com.nordryd.springexample;
 
-import com.nordryd.springexample.factorydepinj.CalculatorController;
+import com.nordryd.springexample.beandepinj.CalculatorController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,6 +20,6 @@ public class SpringExampleMain
      * @param args command line arguments.
      */
     public static void main(final String... args) {
-        SpringApplication.run(new Class[] { SpringExampleMain.class, com.nordryd.springexample.factorydepinj.CalculatorController.class, com.nordryd.springexample..CalculatorController }, args);
+        SpringApplication.run(new Class[] { SpringExampleMain.class, CalculatorController.class }, args);
     }
 }
