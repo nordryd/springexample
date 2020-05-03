@@ -1,6 +1,6 @@
-package com.nordryd.springexample.factorydepinj;
+package com.nordryd.springexample;
 
-import com.nordryd.springexample.factorydepinj.controller.CalculatorController;
+import com.nordryd.springexample.factorydepinj.CalculatorController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

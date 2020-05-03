@@ -1,8 +1,10 @@
-package com.nordryd.springexample.factorydepinj.controller;
+package com.nordryd.springexample.factorydepinj;
 
+import static java.util.Arrays.stream;
+import static java.util.Optional.ofNullable;
 import static org.springframework.http.HttpStatus.OK;
 
-import com.nordryd.springexample.factorydepinj.SpringExampleMain;
+import com.nordryd.springexample.SpringExampleMain;
 import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Nordryd
  */
 @RestController
-@RequestMapping("/calc")
+@RequestMapping("/vi/api/calc")
 public class CalculatorController
 {
     private final CalculatorDependencyInjector depInjector;
@@ -34,36 +36,55 @@ public class CalculatorController
     @GetMapping("/add")
     @ResponseBody
     @ResponseStatus(OK)
-    public int add(@RequestParam("values[]") final int... values) {
-        return depInjector.getService().add(values);
+    public int add(@RequestParam("values") final String values) {
+        return depInjector.getService()
+                .add(stream(values.replaceAll(" ", "").split(",")).mapToInt(Integer::parseInt).toArray());
     }
 
     @GetMapping("/subtract")
     @ResponseBody
     @ResponseStatus(OK)
-    public int subtract(@RequestParam("values[]") final int... values) {
-        return depInjector.getService().subtract(values);
+    public int subtract(@RequestParam("values") final String values) {
+        return depInjector.getService()
+                .subtract(stream(values.replaceAll(" ", "").split(",")).mapToInt(Integer::parseInt).toArray());
     }
 
     @GetMapping("/multiply")
     @ResponseBody
     @ResponseStatus(OK)
-    public int multiply(@RequestParam("values[]") final int... values) {
-        return depInjector.getService().multiply(values);
+    public int multiply(@RequestParam("values") final String values) {
+        return depInjector.getService()
+                .multiply(stream(values.replaceAll(" ", "").split(",")).mapToInt(Integer::parseInt).toArray());
     }
 
-    @GetMapping("/multiply")
+    @GetMapping("/square")
     @ResponseBody
     @ResponseStatus(OK)
     public int square(@RequestParam("value") final int value) {
         return depInjector.getService().square(value);
     }
 
-    @GetMapping("/multiply")
+    @GetMapping("/exponent")
     @ResponseBody
     @ResponseStatus(OK)
     public int exponent(@RequestParam("value") final int value, @RequestParam("exp") final int exponent) {
         return depInjector.getService().exponent(value, exponent);
+    }
+
+    @GetMapping("/leftshift")
+    @ResponseBody
+    @ResponseStatus(OK)
+    public int leftShift(@RequestParam("value") final int value,
+            @RequestParam(value = "shift", required = false) final Integer shift) {
+        return depInjector.getService().leftShift(value, shift);
+    }
+
+    @GetMapping("/rightshift")
+    @ResponseBody
+    @ResponseStatus(OK)
+    public int rightShift(@RequestParam("value") final int value,
+            @RequestParam(value = "shift", required = false) final Integer shift) {
+        return depInjector.getService().rightShift(value, shift);
     }
 
     @GetMapping("/help")

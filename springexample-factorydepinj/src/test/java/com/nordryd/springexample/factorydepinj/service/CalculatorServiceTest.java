@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBasicMathAgent;
+import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBitwiseAgent;
 import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -25,14 +26,15 @@ public class CalculatorServiceTest
 {
     @Mock
     private CalculatorDependencyInjector mockDepInjector;
-    @Mock
-    private CalculatorBasicMathAgent mockBasicMathAgent;
 
     private CalculatorService service;
 
     @Nested
     public class BasicMathTest
     {
+        @Mock
+        private CalculatorBasicMathAgent mockBasicMathAgent;
+
         @BeforeEach
         public void setup() {
             when(mockDepInjector.getMathAgent()).thenReturn(mockBasicMathAgent);
@@ -43,7 +45,7 @@ public class CalculatorServiceTest
         public void testAdd() {
             final int expectedResult = 2;
             when(mockBasicMathAgent.add(anyInt())).thenReturn(expectedResult);
-            assertEquals(expectedResult, service.add(2));
+            assertEquals(expectedResult, service.add(expectedResult));
         }
 
         @Test
@@ -75,4 +77,30 @@ public class CalculatorServiceTest
         }
     }
 
+    @Nested
+    public class BitwiseTest
+    {
+        @Mock
+        private CalculatorBitwiseAgent mockBitwiseAgent;
+
+        @BeforeEach
+        public void setup() {
+            when(mockDepInjector.getBitwiseAgent()).thenReturn(mockBitwiseAgent);
+            service = new CalculatorService(mockDepInjector);
+        }
+
+        @Test
+        public void testLeftShift() {
+            final int expectedResult = 2;
+            when(mockBitwiseAgent.leftShift(anyInt(), anyInt())).thenReturn(expectedResult);
+            assertEquals(expectedResult, service.leftShift(expectedResult, expectedResult));
+        }
+
+        @Test
+        public void testRightShift() {
+            final int expectedResult = 2;
+            when(mockBitwiseAgent.rightShift(anyInt(), anyInt())).thenReturn(expectedResult);
+            assertEquals(expectedResult, service.rightShift(expectedResult, expectedResult));
+        }
+    }
 }

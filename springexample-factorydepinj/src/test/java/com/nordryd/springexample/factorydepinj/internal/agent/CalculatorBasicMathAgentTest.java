@@ -77,7 +77,7 @@ public class CalculatorBasicMathAgentTest
     }
 
     private static Stream<Arguments> getSquareTests() {
-        return Stream.of(Arguments.of(2, 4), Arguments.of(1, 1), Arguments.of(0, 0), Arguments.of(9, 81));
+        return Stream.of(Arguments.of(2, 4), Arguments.of(1, 1), Arguments.of(0, 0), Arguments.of(-9, 81));
     }
 
     private static Stream<Arguments> getExponentTests() {

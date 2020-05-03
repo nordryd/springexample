@@ -1,6 +1,6 @@
 package com.nordryd.springexample.factorydepinj.internal.injector;
 
-import com.nordryd.springexample.factorydepinj.SpringExampleMain;
+import com.nordryd.springexample.SpringExampleMain;
 import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBasicMathAgent;
 import com.nordryd.springexample.factorydepinj.internal.agent.CalculatorBitwiseAgent;
 import com.nordryd.springexample.factorydepinj.service.CalculatorService;

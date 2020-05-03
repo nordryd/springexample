@@ -1,6 +1,8 @@
 package com.nordryd.springexample.factorydepinj.service;
 
-import com.nordryd.springexample.factorydepinj.SpringExampleMain;
+import static java.util.Optional.ofNullable;
+
+import com.nordryd.springexample.SpringExampleMain;
 import com.nordryd.springexample.factorydepinj.internal.injector.CalculatorDependencyInjector;
 
 /**
@@ -32,7 +34,6 @@ public class CalculatorService
     }
 
     public int multiply(final int... values) {
-        // shift by 2 for mult by 2
         return depInjector.getMathAgent().multiply(values);
     }
 
@@ -42,5 +43,13 @@ public class CalculatorService
 
     public int exponent(final int value, final int exponent) {
         return depInjector.getMathAgent().exponent(value, exponent);
+    }
+
+    public int leftShift(final int value, final Integer shift) {
+        return depInjector.getBitwiseAgent().leftShift(value, ofNullable(shift).orElse(1));
+    }
+
+    public int rightShift(final int value, final Integer shift) {
+        return depInjector.getBitwiseAgent().rightShift(value, ofNullable(shift).orElse(1));
     }
 }
