@@ -12,6 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * This incarnation uses the {@link GreetingDependencyInjector dependency factory} that we use now, passing a class
  * around that contains the dependencies.
  * </p>
+ * <p>
+ * Can run {@code mvn spring-boot:run} to start up the assembly and hit the endpoints via postman. We don't have to
+ * create a Tomcat or Docker image (at least here, I'm not sure if we could do this in our real projects if we decide
+ * to implement this). Then, thanks to the actuator dep in the pom, we can run:
+ * {@code POST localhost:8080/actuator/shutdown} to shutdown the service remotely (not sure how to make this secure yet,
+ * but that's OOS for this example). This endpoint is necessary because sometimes you can't Ctrl-C or stop the
+ * assembly very easily without doing a kill process or something. It's there for convenience reasons, mainly.
+ * </p>
  *
  * @author Nordryd
  */

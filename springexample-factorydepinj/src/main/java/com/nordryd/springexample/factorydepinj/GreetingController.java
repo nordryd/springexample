@@ -31,21 +31,18 @@ public class GreetingController
     }
 
     @GetMapping("/helloWorld")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String helloWorld() {
         return depInjector.getService().helloWorld();
     }
 
     @GetMapping("/greet")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String greet(@RequestParam("who") final String who) {
         return depInjector.getService().greet(who);
     }
 
     @GetMapping("/sand")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String sand() {
         return depInjector.getService().sand();

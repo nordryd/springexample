@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,21 +30,18 @@ public class GreetingController implements ApplicationContextAware
     private ApplicationContext config;
 
     @GetMapping("/helloWorld")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String helloWorld() {
         return config.getBean(GreetingService.class).helloWorld();
     }
 
     @GetMapping("/greet")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String greet(@RequestParam("who") final String who) {
         return config.getBean(GreetingService.class).greet(who);
     }
 
     @GetMapping("/sand")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String sand() {
         return config.getBean(GreetingService.class).sand();
