@@ -54,7 +54,7 @@ public class GreetingController
     }
 
     @GetMapping("/greet")
-    @ResponseStatus(HttpStatus.OK)
+
     public String greet(@RequestParam("who") final String who) {
         return service.greet(who);
     }
@@ -69,5 +69,17 @@ public class GreetingController
     @ResponseStatus(HttpStatus.OK)
     public String number() {
         return service.number();
+    }
+
+    @GetMapping("/swiggity")
+    @ResponseStatus(HttpStatus.OK)
+    public String swiggity() {
+        return service.swiggity();
+    }
+
+    @GetMapping("/special")
+    @ResponseStatus(HttpStatus.OK)
+    public String special() {
+        return service.special();
     }
 }

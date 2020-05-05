@@ -45,17 +45,20 @@ public class GreetingService
      * explicitly say "get the bean with this name". Spring knows exactly what to do then, and gets the bean we
      * want. We can do this with the normal {@link Bean @Bean} anno in the config class as well if we want multiple
      * beans of the same type that do different things.
+     * <br><br>
+     * It feels like the Qualifier could potentially go against the separation of concerns things, but this is just
+     * for the sake of example, so let's not worry about that for now.
      */
     @Autowired
-    public GreetingService(@Qualifier("uwuGreet") final GreetingAgent agent, final ApplicationContext config) {
-        this.agent = agent;
+    public GreetingService(@Qualifier("normalGreet") final GreetingAgent agent, final ApplicationContext config) {
         this.config = config;
+        this.agent = agent;
     }
 
     public String helloWorld() {
         return agent.helloWorld();
         // return config.getBean("normalGreet", GreetingAgent.class).helloWorld();
-        // this line would also be perfectly valid since there exists a bean of this type and name thanks to
+        // ^^^ this line would also be perfectly valid since there exists a bean of this type and name thanks to
         // the @Component anno and the use of @ComponentScan in the config file. It's unnecessary with autowiring
         // however, so this is just here to reference that it is indeed possible.
     }
@@ -70,5 +73,13 @@ public class GreetingService
 
     public String number() {
         return agent.number(config.getBean(Integer.class));
+    }
+
+    public String swiggity() {
+        return agent.swiggity();
+    }
+
+    public String special() {
+        return agent.special();
     }
 }

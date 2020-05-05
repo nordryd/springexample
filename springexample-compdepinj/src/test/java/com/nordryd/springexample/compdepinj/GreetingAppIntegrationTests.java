@@ -60,7 +60,9 @@ public class GreetingAppIntegrationTests
         return Stream.of(Arguments.of("/v1/api/greeting/helloWorld", HttpStatus.OK, getNormalAndUwuStrings("Hello, World!")),
                          Arguments.of("/v1/api/greeting/greet?who=comrades", HttpStatus.OK, getNormalAndUwuStrings("Greetings, comrades!")),
                          Arguments.of("/v1/api/greeting/sand", HttpStatus.OK, getNormalAndUwuStrings("I don't like sand... it's coarse, rough, and irritating... and it gets everywhere.")),
-                         Arguments.of("/v1/api/greeting/number", HttpStatus.OK, new Pair<>("420360666", "420360666 uwu")));
+                         Arguments.of("/v1/api/greeting/number", HttpStatus.OK, new Pair<>("420360", "420360 uwu")),
+                         Arguments.of("/v1/api/greeting/swiggity", HttpStatus.OK, getNormalAndUwuStrings("Wot? Swiggity Swooty?"),
+                         Arguments.of("/v1/api/greeting/special", HttpStatus.OK, getNormalAndUwuStrings("420360 no scope"))));
         //@formatter:on
     }
 

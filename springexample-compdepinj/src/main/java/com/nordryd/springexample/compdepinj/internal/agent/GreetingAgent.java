@@ -14,9 +14,13 @@ public interface GreetingAgent
 {
     String helloWorld();
 
-    String sand();
-
     String greet(final String toGreet);
 
+    String sand();
+
     String number(final Integer integer);
+
+    String swiggity();
+
+    String special();
 }
