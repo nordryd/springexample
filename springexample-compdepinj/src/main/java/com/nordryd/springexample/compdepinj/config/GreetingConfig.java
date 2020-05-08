@@ -2,6 +2,7 @@ package com.nordryd.springexample.compdepinj.config;
 
 import static java.lang.String.format;
 
+import com.nordryd.springexample.compdepinj.internal.agent.ExampleAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContextAware;
@@ -29,6 +30,11 @@ import org.springframework.stereotype.Component;
  * was gonna be before even writing it to know how to design your beans. This version of using Java for configs and
  * wiring is MUUUCH nicer because we can use Java concepts to accomplish the same things while we write the code itself,
  * as well as using a language we're familiar with, so there's less of a learning curve.
+ * </p>
+ * <p>
+ * Technically it <i>is</i> possible to have parameterized beans, but this is considered a spring anti-pattern since
+ * the whole point is to not worry about object configuration, and impose a separation of concerns by allowing the root
+ * code to focus on the business logic rather than what objects of what type and instance are being passed to it.
  * </p>
  *
  * @author Nordryd
@@ -106,5 +112,10 @@ public class GreetingConfig
         final ExampleAgent agent = new ExampleAgent(authority());
         System.out.println(agent);
         return new ExampleAgent(authority());
+    }
+
+    @Bean("patchMsgFormat")
+    public String patch() {
+        return "This is a PATCH request that has the parameters:\nop: %s\npath: %s\nvalue: %s\n\nwith an ID of %d.";
     }
 }

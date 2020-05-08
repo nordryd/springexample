@@ -2,6 +2,7 @@ package com.nordryd.springexample.compdepinj.internal.agent;
 
 import static java.lang.String.format;
 
+import com.nordryd.springexample.compdepinj.model.PatchRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -47,7 +48,7 @@ public class NormalGreetingAgent implements GreetingAgent
     /**
      * Grabs the bean of type String with the name "swiggity"
      */
-    public String swiggity(){
+    public String swiggity() {
         return config.getBean("swiggity", String.class);
     }
 
@@ -57,5 +58,11 @@ public class NormalGreetingAgent implements GreetingAgent
     @Override
     public String special() {
         return config.getBean("special", String.class);
+    }
+
+    @Override
+    public String patch(final PatchRequestBody requestBody, final int id) {
+        return format(config.getBean("patchMsgFormat", String.class), requestBody.getOp(), requestBody.getPath(),
+                requestBody.getValue(), id);
     }
 }
