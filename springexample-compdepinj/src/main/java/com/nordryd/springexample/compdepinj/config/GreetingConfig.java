@@ -20,7 +20,8 @@ import org.springframework.stereotype.Component;
  * {@link ComponentScan @ComponentScan(root-pkg-path)} defines the directives (package name) of components for
  * auto-scanning. This enables {@link Autowired @Autowired} to be used, scanning for beans in the specified package.
  * I don't know if it uses its own package by default, but it might be good practice to just specify so we know
- * where beans are coming from.
+ * where beans are coming from. {@link EnableAutoConfiguration @EnableAutoConfiguration} is more of a quality-of-life
+ * annotation that fills in some gaps that we don't necessarily care about.
  * </p>
  * <p>
  * This "java" way of a making a spring config is much more java-user-friendly and dispels the meme of spring users
@@ -51,12 +52,18 @@ public class GreetingConfig
     private static final String AUTHORITY = "authority";
 
     /**
+     * <p>
      * If we want to get a bean of an integer, we can use {@link ApplicationContextAware} like in the beanDepInj example
-     * and retrieve it easily. Or we can autowire it as an object field.<br>
+     * and retrieve it easily. Or we can autowire it.<br>
      * NOTE: THE TYPE THE BEAN RETURNS IS THE TYPE OF THE BEAN (ie, this bean returns an {@link Integer}, so this bean
      * is an {@link Integer} bean.
+     * </p>
      * <p>
      * This bean uses a literal value, but constants can be declared above, just like normal variables.
+     * </p>
+     * <p>
+     * This is all a bean is: a glorified Getter. Don't overthink it :P
+     * </p>
      */
     @Bean
     public Integer getInteger() {

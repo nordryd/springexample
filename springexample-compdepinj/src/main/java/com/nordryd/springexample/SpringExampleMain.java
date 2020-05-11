@@ -1,11 +1,14 @@
 package com.nordryd.springexample;
 
+import com.nordryd.springexample.compdepinj.config.GreetingConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -32,12 +35,26 @@ import org.springframework.stereotype.Service;
  * but that's OOS for this example). This endpoint is necessary because sometimes you can't Ctrl-C or stop the
  * assembly very easily without doing a kill process or something. It's there for convenience reasons, mainly.
  * </p>
+ * <p>
+ * The {@link SpringBootApplication @SpringBootApplication} makes this class recognized as a ServletWebServerFactory
+ * bean, and also is equivalent to sticking {@link ComponentScan @ComponentScan},
+ * {@link EnableAutoConfiguration @EnableAutoConfiguration}, and {@link Configuration @Configuration} annotations.
+ * What this implies is that this can be autowired with other beans.
+ * </p>
+ * <p>
+ * I believe when {@link SpringBootApplication @SpringBootApplication} is put on a class (and by extension,
+ * {@link ComponentScan @ComponentScan}), it scans the immediate package and subpackages for
+ * {@link Configuration @Configuration} classes and automatically imports them. This is just a theory, however, because
+ * the {@link SpringBootApplication @SpringBootApplication} initializes the class itself as a bean (remember everything
+ * in Spring is bean-based). {@link Configuration @Configuration} also initializes the class itself as a bean, too.
+ * Thus, since they both exist as beans, Spring is able to autowire them, and it just does all of the under the
+ * hood. But that's just a theory (a GAME theory).
+ * </p>
  *
  * @author Nordryd
  */
-@SpringBootApplication
-@ComponentScan
-@EnableAutoConfiguration
+@SpringBootApplication(scanBasePackages = "com.nordryd.springexample.compdepinj")
+@Import(GreetingConfig.class)
 public class SpringExampleMain
 {
     /**

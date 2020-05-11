@@ -1,10 +1,11 @@
 package com.nordryd.springexample.beandepinj;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.stream.Stream;
 
 import com.nordryd.springexample.SpringExampleMain;
 import javafx.util.Pair;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -41,8 +42,8 @@ public class GreetingAppIntegrationTests
             final Pair<String, String> expectedResults) throws Exception {
         final MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get(endpoint)).andReturn()
                 .getResponse();
-        Assertions.assertEquals(expectedStatus.value(), response.getStatus());
-        Assertions.assertEquals(TESTING_NORMAL_ENDPOINT ? expectedResults.getKey() : expectedResults.getValue(),
+        assertEquals(expectedStatus.value(), response.getStatus());
+        assertEquals(TESTING_NORMAL_ENDPOINT ? expectedResults.getKey() : expectedResults.getValue(),
                 response.getContentAsString());
     }
 

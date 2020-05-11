@@ -5,7 +5,6 @@ import com.nordryd.springexample.compdepinj.config.GreetingConfig;
 import com.nordryd.springexample.compdepinj.internal.agent.GreetingAgent;
 import com.nordryd.springexample.compdepinj.internal.agent.NormalGreetingAgent;
 import com.nordryd.springexample.compdepinj.internal.agent.UwuGreetingAgent;
-import com.nordryd.springexample.compdepinj.model.PatchRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -82,9 +81,5 @@ public class GreetingService
 
     public String special() {
         return agent.special();
-    }
-
-    public String patch(final PatchRequestBody requestBody, final int id) {
-        return agent.patch(requestBody, id);
     }
 }

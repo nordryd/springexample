@@ -1,6 +1,5 @@
 package com.nordryd.springexample.compdepinj.internal.agent;
 
-import com.nordryd.springexample.compdepinj.model.PatchRequestBody;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,6 +23,4 @@ public interface GreetingAgent
     String swiggity();
 
     String special();
-
-    String patch(final PatchRequestBody requestBody, final int id);
 }

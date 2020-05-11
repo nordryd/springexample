@@ -1,6 +1,7 @@
 package com.nordryd.springexample.compdepinj;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
@@ -10,11 +11,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -62,8 +65,8 @@ public class GreetingAppIntegrationTests
                          Arguments.of("/v1/api/greeting/greet?who=comrades", HttpStatus.OK, getNormalAndUwuStrings("Greetings, comrades!")),
                          Arguments.of("/v1/api/greeting/sand", HttpStatus.OK, getNormalAndUwuStrings("I don't like sand... it's coarse, rough, and irritating... and it gets everywhere.")),
                          Arguments.of("/v1/api/greeting/number", HttpStatus.OK, new Pair<>("420360", "420360 uwu")),
-                         Arguments.of("/v1/api/greeting/swiggity", HttpStatus.OK, getNormalAndUwuStrings("Wot? Swiggity Swooty?"),
-                         Arguments.of("/v1/api/greeting/special", HttpStatus.OK, getNormalAndUwuStrings("420360 no scope"))));
+                         Arguments.of("/v1/api/greeting/swiggity", HttpStatus.OK, getNormalAndUwuStrings("Wot? Swiggity Swooty?")),
+                         Arguments.of("/v1/api/greeting/special", HttpStatus.OK, getNormalAndUwuStrings("420360 no scope")));
         //@formatter:on
     }
 
